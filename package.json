@@ -1,0 +1,17 @@
+{
+    "name": "iroundu"
+  , "description": "I round You!"
+  , "version": "0.0.1"
+  , "private": false
+  , "author": "eliotliu"
+  , "dependencies": {
+      "express": "latest"
+    , "express-namespace": "latest"
+    , "mongoose": "latest"
+    , "connect-mongodb": "latest"
+    , "passport": "latest"
+    , "passport-local": "latest"
+    , "nodemon": "latest"
+  }
+}
+
