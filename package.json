@@ -12,6 +12,7 @@
     , "passport": "latest"
     , "passport-local": "latest"
     , "nodemon": "latest"
-  }
+    , "underscore":"latest"
+    }
 }
 

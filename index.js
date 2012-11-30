@@ -1,6 +1,17 @@
-var express = require('express');
-    
-var app     = express();
+var express = require('express')
+,   fs = require('fs')
+,   passport = require('passport')
+
+var env = process.env.NODE_ENV || 'development'
+,   userConf = require('./config/userConfig')[env]
+,   sysConf = require('./config/sysConfig')
+
+var mongoose = require('mongoose')
+,   Schema = mongoose.Schema
+mongoose.connect(userConf.db)
+
+
+var app = express()
 
 app.get('/',function(req,res){
     res.send("hello world");
