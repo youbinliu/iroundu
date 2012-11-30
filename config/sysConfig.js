@@ -1,10 +1,10 @@
 var express = require('express')
 
-exports.boot = function(app,config,passport){
-    bootSysConfig(app,config,passport)
+exports.setup = function(app,passport){
+    bootSysConfig(app,passport)
 }
 
-function bootSysConfig(app,config,passport){
+function bootSysConfig(app,passport){
     app.set('showStackError',true)
 
     app.use(express.logger(':method : url : status'))

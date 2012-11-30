@@ -4,7 +4,6 @@ var express = require('express')
 
 var env = process.env.NODE_ENV || 'development'
 ,   userConf = require('./config/userConfig')[env]
-,   sysConf = require('./config/sysConfig')
 
 var mongoose = require('mongoose')
 ,   Schema = mongoose.Schema
@@ -16,13 +15,17 @@ modelFiles.forEach(function(modelName){
     require(modelsPath+'/'+modelName)
 })
 
-
+require("./lib/passport").setup(passport,userConf)
 
 var app = express()
+
+require('./config/sysConfig').setup(app,passport)
+require("./config/routes").setup(app,passport)
+
 
 app.get('/',function(req,res){
     res.send("hello world");
 });
 
-app.listen(80);
-console.log('Listening on port 80');
+app.listen(userConf.port);
+console.log('Listening on port '+userConf.port);
