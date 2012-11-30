@@ -1,6 +1,15 @@
 var express = require('express')
 
-exports.setup = function(app,passport){
+exports.settings = {
+    development:{
+        db:'mongodb://localhost/iroundu',
+        port:80
+    },
+    test:{},
+    production:{}
+}
+
+exports.appSet = function(app,passport){
     bootSysConfig(app,passport)
 }
 
