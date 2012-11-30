@@ -10,6 +10,13 @@ var mongoose = require('mongoose')
 ,   Schema = mongoose.Schema
 mongoose.connect(userConf.db)
 
+var modelsPath = __dirname + '/app/models'
+,   modelFiles = fs.readdirSync(modelsPath)
+modelFiles.forEach(function(modelName){
+    require(modelsPath+'/'+modelName)
+})
+
+
 
 var app = express()
 
