@@ -15,11 +15,7 @@ exports.settings = {
 
 
 exports.appSet = function(app,passport){
-    bootSysConfig(app,passport)
-}
-
-function bootSysConfig(app,passport){
-    app.set('showStackError',true)     
+   app.set('showStackError',true)     
    
     
     app.use(express.logger(':method :url :status'))
@@ -31,7 +27,7 @@ function bootSysConfig(app,passport){
     app.use(express.session({
       secret: 'iroundu',
       store: new mongoStore({
-        url: this.settings['development'].db,
+        url: this.settings[this.env].db,
         collection : 'sessions'
       })
     }))
@@ -52,5 +48,5 @@ function bootSysConfig(app,passport){
     
     app.set('showStackError',false)
 
-
 }
+
