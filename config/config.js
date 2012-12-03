@@ -1,7 +1,7 @@
 var express = require('express')
   , mongoStore = require('connect-mongodb')
 
-var env = "development"
+exports.env = "development"
 
 exports.settings = {
     development:{
