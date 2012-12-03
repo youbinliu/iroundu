@@ -8,29 +8,31 @@ exports.test = function(req,res){
     console.log(req.user)
 }
 
-exports.login = function(req,res,next){
-   if(util.isNullOrEmity(req.body.email) ||
+exports.login = function(req,res){
+    if(req.user)res.json({code:0,message:'已经登录了'})
+    
+    if(util.isNullOrEmity(req.body.email) ||
        util.isNullOrEmity(req.body.password)){
-           res.send({code:1,message:'密码，邮箱均为必填项'})
+           res.json({code:1,message:'密码，邮箱均为必填项'})
        }
     
     
     User.findOne({email:res.body.email,hashed_password:User.encryptPassword(req.body.password)}).exec(function(err,user){        
         if(user){
             req.logIn(user, function(err) {
-              if (err) return next(err)
-              res.send({code:0,message:'login ok'})
+              if (err) res.json({code:0,message:err.errors})
+              else res.json({code:0,message:'登录成功'})
             })
            
         }else{
-            res.send({code:1,message:'邮箱或者密码错误'})
+            res.json({code:1,message:'邮箱或者密码错误'})
         }
     })
 }
 
 exports.logout = function(req,res){
     req.logout();
-    res.send({code:0,message:'logout ok'})
+    res.send({code:0,message:'退出成功'})
 }
 
 exports.register = function(req,res){

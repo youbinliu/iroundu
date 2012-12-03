@@ -9,7 +9,8 @@ module.exports.setup = function (app, passport) {
   app.get('/'+_v+'/users/login', users.login)
   app.get('/'+_v+'/users/logout', users.logout)
   app.post('/'+_v+'/users/register', users.register) 
- 
+  app.post('/'+_v+'/users/test', users.test)
+  
   app.param('userId', function (req, res, next, id) {
     User
       .findOne({ _id : id })
