@@ -31,3 +31,4 @@
 {"ts":1354551854123,"patch":[[{"diffs":[[0,"(\"../../"],[-1,"../"],[0,"lib/util"]],"start1":87,"start2":87,"length1":19,"length2":16}]],"length":1691,"saved":false}
 {"ts":1354553429037,"patch":[[{"diffs":[[0,"indOne({email:re"],[-1,"s"],[1,"q"],[0,".body.email}).ex"]],"start1":1211,"start2":1211,"length1":33,"length2":33}]],"length":1691,"saved":false}
 {"ts":1354553468747,"patch":[[{"diffs":[[0,"ame:"],[-1,"this"],[1,"req"],[0,".bod"]],"start1":1363,"start2":1363,"length1":12,"length2":11}]],"length":1690,"saved":false}
+{"ts":1354553656338,"patch":[[{"diffs":[[0,"indOne({"],[1,"'"],[0,"email"],[1,"'"],[0,":req.bod"]],"start1":1211,"start2":1211,"length1":21,"length2":23},{"diffs":[[0,"indOne({"],[1,"'"],[0,"username"],[1,"'"],[0,":req.bod"]],"start1":1352,"start2":1352,"length1":24,"length2":26}]],"length":1694,"saved":false}
