@@ -45,7 +45,7 @@ exports.register = function(req,res){
         if(user)res.send({code:1,message:'邮箱已经被注册'})
     })
     
-    User.findOne({username:this.body.username}).exec(function(err,user){
+    User.findOne({username:req.body.username}).exec(function(err,user){
         if(user)res.send({code:1,message:'用户名已经被注册'})
     })
     
