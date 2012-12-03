@@ -4,6 +4,10 @@ var mongoose = require("mongoose")
 
 exports.authCallback = function(req,res,next){}
 
+exports.test = function(req,res){
+    console.log(req.user)
+}
+
 exports.login = function(req,res,next){
    if(util.isNullOrEmity(req.body.email) ||
        util.isNullOrEmity(req.body.password)){
@@ -52,7 +56,7 @@ exports.register = function(req,res){
                     u.save(function(err){
                         if (err)res.json({code:1,message:err.errors})
                         else {
-                            req.logIn(u, function(err) {
+                            req.login(u, function(err) {
                                 console.log(u)
                                 if (err)res.json({code:1,message:"error"})
                                 console.log(err)
