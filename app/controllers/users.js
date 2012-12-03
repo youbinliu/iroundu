@@ -53,7 +53,11 @@ exports.register = function(req,res){
     user.provider = 'local'
     user.save(function(err){
         if (err)res.send({code:1,message:err.errors})
-        else res.send({code:0,message:'create ok'})  
+        else {
+            req.logIn(user, function(err) {
+                res.send({code:0,message:'login ok'})
+            })
+        }
     })
     
 }
