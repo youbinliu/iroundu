@@ -9,7 +9,7 @@ var config = require('./config/config')
 
 
 var mongoose = require('mongoose')
-mongoose.connect(app.get("db"))
+mongoose.connect(config.settings[config.env].db)
 
 var modelsPath = __dirname + '/app/models'
 ,   modelFiles = fs.readdirSync(modelsPath)
@@ -21,5 +21,5 @@ require("./lib/passport").setup(passport)
 config.appSet(app,passport)
 require("./config/routes").setup(app,passport)
 
-app.listen(app.get('port'));
-console.log('Listening on port '+app.get('port'));
+app.listen(config.settings[config.env].port);
+console.log('Listening on port '+config.settings[config.env].port);
