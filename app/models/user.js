@@ -6,12 +6,12 @@ var mongoose = require('mongoose')
   , _ = require('underscore')
   
 var UserSchema = new Schema({
-    name: String
-  , email: String
+    email: String
   , username: String
   , provider: String
   , hashed_password: String
   , salt: String
+  ,createdTime:{type: Date, default: Date.now}
 })
 
 // virtual attributes
@@ -31,24 +31,20 @@ var validatePresenceOf = function (value) {
 
 // the below 4 validations only apply if you are signing up traditionally
 
-UserSchema.path('name').validate(function (name) { 
-  return name.length
-}, 'Name cannot be blank')
-
 UserSchema.path('email').validate(function (email) {
-  return email.length
-}, 'Email cannot be blank')
+  return email.length && /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)
+}, '邮箱格式不正确')
 
 UserSchema.path('username').validate(function (username) { 
   return username.length
-}, 'Username cannot be blank')
+}, '用户名不能为空')
 
 
 // pre save hooks
 UserSchema.pre('save', function(next) {
   
   if (!validatePresenceOf(this.password))
-    next(new Error('Invalid password'))
+    return(new Error('Invalid password'))
   else
     next()
 })
