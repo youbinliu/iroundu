@@ -1,5 +1,6 @@
 var express = require('express')
-
+  , mongoStore = require('connect-mongodb')
+  
 exports.settings = {
     development:{
         db:'mongodb://localhost/iroundu',
@@ -22,6 +23,14 @@ function bootSysConfig(app,passport){
 
     app.use(express.methodOverride())
 
+    app.use(express.session({
+      secret: 'iroundu',
+      store: new mongoStore({
+        url: this.settings.db,
+        collection : 'sessions'
+      })
+    }))
+    
     app.use(passport.initialize())
 
     app.use(app.router)

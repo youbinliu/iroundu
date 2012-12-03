@@ -1,15 +1,15 @@
 
 var mongoose = require('mongoose')
   , User = mongoose.model('User')
+var _v = 1
 
 module.exports.setup = function (app, passport) {
 
   // user routes
   var users = require('../app/controllers/users')
-  app.get('/login', users.login)
-  //app.get('/signup', users.signup)
-  //app.get('/logout', users.logout)
-  app.post('/users', users.create) 
+  app.get('/'+_v+'/users/login', users.login)
+  //app.get('/'+_v+'/users/logout', users.logout)
+  app.post('/'+_v+'/users/register', users.register) 
   //app.get('/users/:userId', users.show)
  
   app.param('userId', function (req, res, next, id) {

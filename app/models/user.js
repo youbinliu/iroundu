@@ -29,31 +29,6 @@ var validatePresenceOf = function (value) {
   return value && value.length
 }
 
-// the below 4 validations only apply if you are signing up traditionally
-
-UserSchema.path('email').validate(function (email) {
-  return email.length && /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/.test(email)
-}, '邮箱格式不正确')
-
-UserSchema.path('username').validate(function (username) { 
-  return username.length
-}, '用户名不能为空')
-
-
-// pre save hooks
-UserSchema.pre('save', function(next) {
-  this.model('User').findOne({email:this.email},function(err,user){
-      if(err)next(err)
-      if(user)return new Error({message:'邮箱已经被注册了'})
-  })
-  
-  this.model('User').findOne({username:this.username},function(err,user){
-      if(err)next(err)
-      if(user)return new Error({message:'用户名已经存在'})
-  })
-  next()
-})
-
 // methods
 UserSchema.method('authenticate', function(plainText) {
   return this.encryptPassword(plainText) === this.hashed_password
