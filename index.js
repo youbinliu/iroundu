@@ -2,7 +2,7 @@ var express = require('express')
 ,   fs = require('fs')
 ,passport = require('passport')
 
-config = require('./config/config')
+var config = require('./config/config')
 
 var mongoose = require('mongoose')
 ,   Schema = mongoose.Schema
@@ -26,5 +26,5 @@ app.get('/',function(req,res){
     res.send("hello world");
 });
 
-app.listen(config.settings[env].port);
-console.log('Listening on port '+config.settings[env].port);
+app.listen(config.settings[config.env].port);
+console.log('Listening on port '+config.settings[config.env].port);

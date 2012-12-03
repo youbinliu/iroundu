@@ -28,7 +28,7 @@ function bootSysConfig(app,passport){
     app.use(express.session({
       secret: 'iroundu',
       store: new mongoStore({
-        url: this.settings[env].db,
+        url: this.settings[this.env].db,
         collection : 'sessions'
       })
     }))
