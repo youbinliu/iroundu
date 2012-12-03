@@ -1,6 +1,6 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
-var util = require("../../lib/util")
+var util = require("../../../lib/util")
 
 exports.authCallback = function(req,res,next){}
 
