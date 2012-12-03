@@ -24,6 +24,9 @@ exports.appSet = function(app,passport){
 
     app.use(express.methodOverride())
 
+    console.log(this.settings)
+    console.log(this.env)
+    
     app.use(express.session({
       secret: 'iroundu',
       store: new mongoStore({
