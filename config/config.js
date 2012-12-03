@@ -1,24 +1,40 @@
 var express = require('express')
   , mongoStore = require('connect-mongodb')
+//
+//exports.env = "development"
+//
+//exports.settings = {
+//    development:{
+//        db:'mongodb://localhost/iroundu',
+//        port:80
+//    },
+//    test:{},
+//    production:{}
+//}
 
-exports.env = "development"
 
-exports.settings = {
-    development:{
-        db:'mongodb://localhost/iroundu',
-        port:80
-    },
-    test:{},
-    production:{}
-}
 
 exports.appSet = function(app,passport){
     bootSysConfig(app,passport)
 }
 
 function bootSysConfig(app,passport){
-    app.set('showStackError',true)
-
+    app.set('showStackError',true)    
+    
+    app.configure(function(){
+        app.set('db', 'mongodb://localhost/iroundu');
+        app.set('port',80)
+    })
+    // development only
+    app.configure('development', function(){
+        app.set('db', 'mongodb://localhost/iroundu');
+        app.set('port',80)
+    })
+    app.configure('production', function(){
+        app.set('db', 'mongodb://localhost/iroundu');
+        app.set('port',80)
+    })
+    
     app.use(express.logger(':method :url :status'))
 
     app.use(express.bodyParser())
