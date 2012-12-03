@@ -1,13 +1,16 @@
 var express = require('express')
 ,   fs = require('fs')
-,   passport = require('passport')
-
-var env = process.env.NODE_ENV || 'development'
-,   config = require('./config/config')
 
 var mongoose = require('mongoose')
 ,   Schema = mongoose.Schema
 mongoose.connect(config.settings[env].db)
+
+var   passport = require('passport')
+
+var env = process.env.NODE_ENV || 'development'
+,   config = require('./config/config')
+
+
 
 var modelsPath = __dirname + '/app/models'
 ,   modelFiles = fs.readdirSync(modelsPath)

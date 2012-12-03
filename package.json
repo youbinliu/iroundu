@@ -7,12 +7,15 @@
   , "dependencies": {
       "express": "latest"
     , "express-namespace": "latest"
+    , "jade": "latest"
     , "mongoose": "latest"
     , "connect-mongodb": "latest"
     , "passport": "latest"
     , "passport-local": "latest"
+    , "underscore": "latest"
+    , "gzippo": "latest"
+    , "async": "latest"
     , "nodemon": "latest"
-    , "underscore":"latest"
     }
 }
 
