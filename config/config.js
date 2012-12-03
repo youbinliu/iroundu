@@ -1,7 +1,7 @@
 var express = require('express')
   , mongoStore = require('connect-mongodb')
 
-exports.env = "development"
+exports.env ="development"
 
 exports.settings = {
     development:{
@@ -31,7 +31,7 @@ function bootSysConfig(app,passport){
     app.use(express.session({
       secret: 'iroundu',
       store: new mongoStore({
-        url: this.settings[this.env].db,
+        url: this.settings['development'].db,
         collection : 'sessions'
       })
     }))
