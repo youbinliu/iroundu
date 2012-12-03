@@ -44,12 +44,12 @@ UserSchema.path('username').validate(function (username) {
 UserSchema.pre('save', function(next) {
   this.model('User').findOne({email:this.email},function(err,user){
       if(err)next(err)
-      if(user)next({message:'邮箱已经被注册了'})
+      if(user)return new Error({message:'邮箱已经被注册了'})
   })
   
   this.model('User').findOne({username:this.username},function(err,user){
       if(err)next(err)
-      if(user)next({message:'用户名已经存在'})
+      if(user)return new Error({message:'用户名已经存在'})
   })
   next()
 })
