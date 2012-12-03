@@ -54,7 +54,9 @@ exports.register = function(req,res){
                         if (err)res.send({code:1,message:err.errors})
                         else {
                             req.logIn(u, function(err) {
-                                if (err)res.send({code:1,message:err.errors})
+                                
+                                if (err)res.send({code:1,message:"error"})
+                                console.log(err)
                                 res.send({code:0,message:'注册成功，并且已登录'})
                             })
                         }
