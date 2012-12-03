@@ -39,10 +39,6 @@ UserSchema.path('username').validate(function (username) {
   return username.length
 }, '用户名不能为空')
 
-UserSchema.path('password').validate(function (password) { 
-  return password.length>=6
-}, '密码不能短语6个字符')
-
 
 // pre save hooks
 UserSchema.pre('save', function(next) {
