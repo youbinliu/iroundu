@@ -41,7 +41,7 @@ exports.register = function(req,res){
         res.send({code:1,message:'邮箱格式不正确'})
     }
     
-    User.findOne({email:res.body.email}).exec(function(err,user){        
+    User.findOne({email:req.body.email}).exec(function(err,user){        
         if(user)res.send({code:1,message:'邮箱已经被注册'})
     })
     

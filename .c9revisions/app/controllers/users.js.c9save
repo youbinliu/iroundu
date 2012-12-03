@@ -29,3 +29,4 @@
 {"ts":1354551615034,"patch":[[{"diffs":[[0,"re(\""],[-1,"../.."],[0,"/lib"]],"start1":85,"start2":85,"length1":13,"length2":8}]],"length":1686,"saved":false}
 {"ts":1354551748696,"patch":[[{"diffs":[[0,"equire(\""],[1,"../../.."],[0,"/lib/uti"]],"start1":81,"start2":81,"length1":16,"length2":24}]],"length":1694,"saved":false}
 {"ts":1354551854123,"patch":[[{"diffs":[[0,"(\"../../"],[-1,"../"],[0,"lib/util"]],"start1":87,"start2":87,"length1":19,"length2":16}]],"length":1691,"saved":false}
+{"ts":1354553429037,"patch":[[{"diffs":[[0,"indOne({email:re"],[-1,"s"],[1,"q"],[0,".body.email}).ex"]],"start1":1211,"start2":1211,"length1":33,"length2":33}]],"length":1691,"saved":false}
