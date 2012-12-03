@@ -28,3 +28,4 @@
 {"ts":1354547858685,"patch":[[{"diffs":[[0,"gout();\n"],[1,"    res.send({code:0,message:'logout ok'})\n"],[0,"}\n\nexpor"]],"start1":799,"start2":799,"length1":16,"length2":59}]],"length":1691,"saved":false}
 {"ts":1354551615034,"patch":[[{"diffs":[[0,"re(\""],[-1,"../.."],[0,"/lib"]],"start1":85,"start2":85,"length1":13,"length2":8}]],"length":1686,"saved":false}
 {"ts":1354551748696,"patch":[[{"diffs":[[0,"equire(\""],[1,"../../.."],[0,"/lib/uti"]],"start1":81,"start2":81,"length1":16,"length2":24}]],"length":1694,"saved":false}
+{"ts":1354551854123,"patch":[[{"diffs":[[0,"(\"../../"],[-1,"../"],[0,"lib/util"]],"start1":87,"start2":87,"length1":19,"length2":16}]],"length":1691,"saved":false}
