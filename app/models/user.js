@@ -42,12 +42,12 @@ UserSchema.path('username').validate(function (username) {
 
 // pre save hooks
 UserSchema.pre('save', function(next) {
-  this.model('user').findOne({email:this.email},function(err,user){
+  this.model('User').findOne({email:this.email},function(err,user){
       if(err)next(err)
       if(user)next({message:'邮箱已经被注册了'})
   })
   
-  this.model('user').findOne({username:this.username},function(err,user){
+  this.model('User').findOne({username:this.username},function(err,user){
       if(err)next(err)
       if(user)next({message:'用户名已经存在'})
   })
