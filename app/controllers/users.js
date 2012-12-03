@@ -1,6 +1,7 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
-var util = require("../../lib/util")
+,   util = require("../../lib/util")
+,   async = require("async")
 
 exports.authCallback = function(req,res,next){}
 
@@ -43,21 +44,27 @@ exports.register = function(req,res){
     
     User.findOne({'email':req.body.email}).exec(function(err,user){        
         if(user)res.send({code:1,message:'邮箱已经被注册'})
-    })
-    
-    User.findOne({'username':req.body.username}).exec(function(err,user){
-        if(user)res.send({code:1,message:'用户名已经被注册'})
-    })
-    
-    var user = new User(req.body)
-    user.provider = 'local'
-    user.save(function(err){
-        if (err)res.send({code:1,message:err.errors})
-        else {
-            req.logIn(user, function(err) {
-                res.send({code:0,message:'login ok'})
+        else{
+             User.findOne({'username':req.body.username}).exec(function(err,user){
+                if(user)res.send({code:1,message:'用户名已经被注册'})
+                else{
+                    var u = new User(req.body)
+                    u.provider = 'local'
+                    u.save(function(err){
+                        if (err)res.send({code:1,message:err.errors})
+                        else {
+                            req.logIn(u, function(err) {
+                                res.send({code:0,message:'注册成功，并且已登录'})
+                            })
+                        }
+                    })
+                }
             })
         }
     })
+    
+   
+    
+    
     
 }
