@@ -15,18 +15,16 @@ exports.settings = {
 
 
 exports.appSet = function(app,passport){
-   app.set('showStackError',true)     
-   
+    app.set('showStackError',true)   
     
     app.use(express.logger(':method :url :status'))
-
+    
+    app.use(express.cookieParser()); 
+    
     app.use(express.bodyParser())
 
     app.use(express.methodOverride())
 
-    console.log(this.settings)
-    console.log(this.env)
-    
     app.use(express.session({
       secret: 'iroundu',
       store: new mongoStore({

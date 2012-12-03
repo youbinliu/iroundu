@@ -4,13 +4,11 @@ var mongoose = require('mongoose')
 var _v = 1
 
 module.exports.setup = function (app, passport) {
-
   // user routes
   var users = require('../app/controllers/users')
   app.get('/'+_v+'/users/login', users.login)
-  //app.get('/'+_v+'/users/logout', users.logout)
+  app.get('/'+_v+'/users/logout', users.logout)
   app.post('/'+_v+'/users/register', users.register) 
-  //app.get('/users/:userId', users.show)
  
   app.param('userId', function (req, res, next, id) {
     User
@@ -22,9 +20,5 @@ module.exports.setup = function (app, passport) {
         next()
       })
   })
-
- 
-  // home route
-  //app.get('/', articles.index)
 
 }
