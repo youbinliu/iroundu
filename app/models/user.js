@@ -46,14 +46,7 @@ UserSchema.path('username').validate(function (username) {
 
 // pre save hooks
 UserSchema.pre('save', function(next) {
-  User.findOne({email:this.email}).exec(function(err,user){
-      if(err)return next(err)
-      if(user)return next(new Error('Invalid email'))
-  })
-  User.findOne({username:this.username}).exec(function(err,user){
-      if(err)return next(err)
-      if(user)return next(new Error('Invalid username'))
-  })
+  
   if (!validatePresenceOf(this.password))
     next(new Error('Invalid password'))
   else

@@ -12,6 +12,15 @@ exports.login = function(req,res,next){
 }
 
 exports.create = function(req,res){
+    
+    User.findOne({email:this.email}).exec(function(err,user){
+        if(err)return next(err)
+        if(user)return next(new Error('Invalid email'))
+    })
+    User.findOne({username:this.username}).exec(function(err,user){
+        if(err)return next(err)
+        if(user)return next(new Error('Invalid username'))
+    })
     var user = new User(req.body)
     user.provider = 'local'
     user.save(function(err){
