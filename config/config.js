@@ -16,7 +16,7 @@ exports.appSet = function(app,passport){
 function bootSysConfig(app,passport){
     app.set('showStackError',true)
 
-    app.use(express.logger(':method : url : status'))
+    app.use(express.logger(':method :url :status'))
 
     app.use(express.bodyParser())
 
