@@ -1,7 +1,6 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
 ,   util = require("../../lib/util")
-,   async = require("async")
 
 exports.authCallback = function(req,res,next){}
 
@@ -35,29 +34,29 @@ exports.register = function(req,res){
     if(util.isNullOrEmity(req.body.username) ||
        util.isNullOrEmity(req.body.password) || 
        util.isNullOrEmity(req.body.email)){
-           res.send({code:1,message:'用户名，密码，邮箱均为必填项'})
+           res.json({code:1,message:'用户名，密码，邮箱均为必填项'})
        }
     
     if(!util.isEmail(req.body.email)){
-        res.send({code:1,message:'邮箱格式不正确'})
+        res.json({code:1,message:'邮箱格式不正确'})
     }
     
     User.findOne({'email':req.body.email}).exec(function(err,user){        
-        if(user)res.send({code:1,message:'邮箱已经被注册'})
+        if(user)res.json({code:1,message:'邮箱已经被注册'})
         else{
              User.findOne({'username':req.body.username}).exec(function(err,user){
-                if(user)res.send({code:1,message:'用户名已经被注册'})
+                if(user)res.json({code:1,message:'用户名已经被注册'})
                 else{
                     var u = new User(req.body)
                     u.provider = 'local'
                     u.save(function(err){
-                        if (err)res.send({code:1,message:err.errors})
+                        if (err)res.json({code:1,message:err.errors})
                         else {
                             req.logIn(u, function(err) {
-                                
-                                if (err)res.send({code:1,message:"error"})
+                                console.log(u)
+                                if (err)res.json({code:1,message:"error"})
                                 console.log(err)
-                                res.send({code:0,message:'注册成功，并且已登录'})
+                                res.json({code:0,message:'注册成功，并且已登录'})
                             })
                         }
                     })
