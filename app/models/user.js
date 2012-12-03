@@ -39,14 +39,23 @@ UserSchema.path('username').validate(function (username) {
   return username.length
 }, '用户名不能为空')
 
+UserSchema.path('password').validate(function (password) { 
+  return password.length>=6
+}, '密码不能短语6个字符')
+
 
 // pre save hooks
 UserSchema.pre('save', function(next) {
+  this.model('email').findOne({email:this.email},function(err,user){
+      if(err)next(err)
+      if(user)next({message:'邮箱已经被注册了'})
+  })
   
-  if (!validatePresenceOf(this.password))
-    return(new Error('Invalid password'))
-  else
-    next()
+  this.model('user').findOne({username:this.username},function(err,user){
+      if(err)next(err)
+      if(user)next({message:'用户名已经存在'})
+  })
+  next()
 })
 
 // methods
