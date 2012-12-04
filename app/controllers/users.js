@@ -1,7 +1,7 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
 ,   util = require("../../lib/util")
-,   ImageUpload = require("../../lib/imageUpload")
+,   ImageUpload = require("../../lib/imageUpload").ImageUpload
 
 exports.authCallback = function(req,res,next){}
 
