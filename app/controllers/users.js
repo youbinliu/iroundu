@@ -1,6 +1,7 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
 ,   util = require("../../lib/util")
+,   passport = require('passport')
 
 exports.authCallback = function(req,res,next){}
 
@@ -12,12 +13,12 @@ exports.test = function(req,res){
 exports.login = function(req,res){
     if(req.user)return res.json({code:0,message:'已经登录了'})
     
+    
     if(util.isNullOrEmity(req.body.email) ||
        util.isNullOrEmity(req.body.password)){
            return res.json({code:1,message:'密码，邮箱均为必填项'})
        }
-    
-    
+       
     User.findOne({email:req.body.email,hashed_password:User.encryptPassword(req.body.password)}).exec(function(err,user){        
         if(user){
             req.logIn(user, function(err) {
