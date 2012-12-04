@@ -38,8 +38,8 @@ UserSchema.method('makeSalt', function() {
   return Math.round((new Date().valueOf() * Math.random())) + ''
 })
 
-UserSchema.statics.encryptPassword = function(password) {
+UserSchema.method('encryptPassword', function(password) {
   return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
-}
+})
 
 mongoose.model('User', UserSchema)

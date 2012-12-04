@@ -18,18 +18,17 @@ exports.login = function(req,res){
        util.isNullOrEmity(req.body.password)){
            return res.json({code:1,message:'密码，邮箱均为必填项'})
        }
-       
-    User.findOne({email:req.body.email,hashed_password:User.encryptPassword(req.body.password)}).exec(function(err,user){        
-        if(user){
-            req.logIn(user, function(err) {
-              if (err) res.json({code:0,message:err.errors})
-              else res.json({code:0,message:'登录成功'})
-            })
-           
-        }else{
-            res.json({code:1,message:'邮箱或者密码错误'})
-        }
-    })
+    
+     User.findOne({email:req.body.email},function(err,user){           
+            if (!user) {
+                return res.json({code:1,message:'用户名不存在'})
+            }
+            if (!user.authenticate(req.body.password)) {
+                return res.json({code:1,message:'密码错误'})
+            }
+            res.json({code:0,message:'登录成功'})
+        })
+    
 }
 
 exports.logout = function(req,res){
