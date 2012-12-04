@@ -18,7 +18,7 @@ exports.login = function(req,res){
        }
     
     
-    User.findOne({email:res.body.email,hashed_password:User.encryptPassword(req.body.password)}).exec(function(err,user){        
+    User.findOne({email:req.body.email,hashed_password:User.encryptPassword(req.body.password)}).exec(function(err,user){        
         if(user){
             req.logIn(user, function(err) {
               if (err) res.json({code:0,message:err.errors})
