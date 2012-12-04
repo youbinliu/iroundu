@@ -6,14 +6,15 @@ exports.authCallback = function(req,res,next){}
 
 exports.test = function(req,res){
     console.log(req.user)
+    res.json(req.user)
 }
 
 exports.login = function(req,res){
-    if(req.user)res.json({code:0,message:'已经登录了'})
+    if(req.user)return res.json({code:0,message:'已经登录了'})
     
     if(util.isNullOrEmity(req.body.email) ||
        util.isNullOrEmity(req.body.password)){
-           res.json({code:1,message:'密码，邮箱均为必填项'})
+           return res.json({code:1,message:'密码，邮箱均为必填项'})
        }
     
     
@@ -32,7 +33,7 @@ exports.login = function(req,res){
 
 exports.logout = function(req,res){
     req.logout();
-    res.send({code:0,message:'退出成功'})
+    res.json({code:0,message:'退出成功'})
 }
 
 exports.register = function(req,res){
@@ -40,11 +41,11 @@ exports.register = function(req,res){
     if(util.isNullOrEmity(req.body.username) ||
        util.isNullOrEmity(req.body.password) || 
        util.isNullOrEmity(req.body.email)){
-           res.json({code:1,message:'用户名，密码，邮箱均为必填项'})
+           return res.json({code:1,message:'用户名，密码，邮箱均为必填项'})
        }
     
     if(!util.isEmail(req.body.email)){
-        res.json({code:1,message:'邮箱格式不正确'})
+        return res.json({code:1,message:'邮箱格式不正确'})
     }
     
     User.findOne({'email':req.body.email}).exec(function(err,user){        
@@ -59,9 +60,7 @@ exports.register = function(req,res){
                         if (err)res.json({code:1,message:err.errors})
                         else {
                             req.login(u, function(err) {
-                                console.log(u)
-                                if (err)res.json({code:1,message:"error"})
-                                console.log(err)
+                                if (err)return res.json({code:1,message:"error"})
                                 res.json({code:0,message:'注册成功，并且已登录'})
                             })
                         }
