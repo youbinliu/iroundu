@@ -1,6 +1,7 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
 ,   util = require("../../lib/util")
+,   ImageUpload = require("../../lib/imageUpload")
 
 exports.authCallback = function(req,res,next){}
 
@@ -72,5 +73,22 @@ exports.register = function(req,res){
             })
         }
     })
-    
+}
+
+exports.uploadAvatar = function(req,res){
+    var imageUpload = new ImageUpload();
+    imageUpload.insert(req.files.avatar,function(result){
+        console.log('file id:' + result._id);
+        res.send('saved.');
+    })
+      
+    res.send('上传中.');   
+}
+
+exports.avatar = function(req,res){
+    var imageUpload = new ImageUpload();
+    imageUpload.read(req.body.avatar, function (data) {
+        console.log('read data');
+        res.send(data);
+    }); 
 }
