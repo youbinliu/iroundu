@@ -85,9 +85,10 @@ exports.uploadAvatar = function(req,res){
     res.send('上传中.');   
 }
 
-exports.avatar = function(req,res){
+exports.avatar = function(req,res,aid){
+    console.log(req)
     var imageUpload = new ImageUpload();
-    imageUpload.read(req.aid, function (data) {
+    imageUpload.read(aid, function (data) {
         console.log('read data');
         res.send(data);
     }); 
