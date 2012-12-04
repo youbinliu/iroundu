@@ -29,8 +29,10 @@ exports.appSet = function(app,passport){
       secret: 'iroundu',
       store: new mongoStore({
         url: this.settings[this.env].db,
-        collection : 'sessions'
-      })
+        collection : 'sessions',
+        reapInterval: 60000*5
+      }),
+      cookie: {maxAge: 60000*60*24*7}
     }))
     
     app.use(passport.initialize())
