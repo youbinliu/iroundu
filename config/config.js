@@ -34,7 +34,8 @@ exports.appSet = function(app,passport){
     }))
     
     app.use(passport.initialize())
-
+    app.use(passport.session())
+    
     app.use(app.router)
     
     app.use(function(err,req,res,next){
