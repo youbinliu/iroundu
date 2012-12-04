@@ -6,8 +6,8 @@ var mongoose = require("mongoose")
 exports.authCallback = function(req,res,next){}
 
 exports.test = function(req,res){
-    console.log(req.user)
-    res.json(req.user)
+    console.log(req)
+    res.json(req)
 }
 
 exports.login = function(req,res){
