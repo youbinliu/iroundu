@@ -11,7 +11,7 @@ module.exports.setup = function (app, passport) {
   app.post('/'+_v+'/users/register', users.register) 
   app.get('/'+_v+'/users/test', users.test)
   app.post('/'+_v+'/users/avatar',users.uploadAvatar)
-  app.get('/'+_v+'/users/avatar/:uid',users.avatar)
+  app.get('/'+_v+'/users/avatar/:aid',users.avatar)
   
   app.param('userId', function (req, res, next, id) {
     User
