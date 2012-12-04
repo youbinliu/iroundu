@@ -11,8 +11,9 @@ exports.test = function(req,res){
 }
 
 exports.login = function(req,res){
+        
     if(req.user)return res.json({code:0,message:'已经登录了'})
-    
+    console.log(req.user)
     
     if(util.isNullOrEmity(req.body.email) ||
        util.isNullOrEmity(req.body.password)){
