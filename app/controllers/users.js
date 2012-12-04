@@ -77,6 +77,7 @@ exports.register = function(req,res){
 
 exports.uploadAvatar = function(req,res){
     var imageUpload = new ImageUpload();
+    console.log(req.files.avatar)
     imageUpload.insert(req.files.avatar,function(result){
         console.log(result);
         res.send('saved.');
