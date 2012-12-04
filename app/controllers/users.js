@@ -1,12 +1,10 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
 ,   util = require("../../lib/util")
-,   passport = require('passport')
 
 exports.authCallback = function(req,res,next){}
 
 exports.test = function(req,res){
-    console.log(req.user)
     res.json("test")
 }
 
@@ -74,9 +72,5 @@ exports.register = function(req,res){
             })
         }
     })
-    
-   
-    
-    
     
 }
