@@ -7,7 +7,7 @@ module.exports.setup = function (app, passport) {
   // user routes
   var users = require('../app/controllers/users')
   app.post('/'+_v+'/users/login', users.login)
-  app.post('/'+_v+'/users/logout', users.logout)
+  app.get('/'+_v+'/users/logout', users.logout)
   app.post('/'+_v+'/users/register', users.register) 
   app.get('/'+_v+'/users/test', users.test)
   
