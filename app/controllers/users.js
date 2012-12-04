@@ -1,5 +1,6 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
+,   fs = require("fs")
 ,   util = require("../../lib/util")
 ,   ImageUpload = require("../../lib/imageUpload").ImageUpload
 
