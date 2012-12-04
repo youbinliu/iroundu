@@ -77,9 +77,8 @@ exports.register = function(req,res){
 
 exports.uploadAvatar = function(req,res){
     var imageUpload = new ImageUpload();
-    console.log(req.files.avatar)
     imageUpload.insert(req.files.avatar,function(result){
-        console.log('file id:' + result._id);
+        console.log(result);
         res.send('saved.');
     })
       
@@ -88,7 +87,7 @@ exports.uploadAvatar = function(req,res){
 
 exports.avatar = function(req,res){
     var imageUpload = new ImageUpload();
-    imageUpload.read(req.body.avatar, function (data) {
+    imageUpload.read(req.body.uid, function (data) {
         console.log('read data');
         res.send(data);
     }); 
