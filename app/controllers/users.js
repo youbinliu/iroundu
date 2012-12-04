@@ -6,8 +6,8 @@ var mongoose = require("mongoose")
 exports.authCallback = function(req,res,next){}
 
 exports.test = function(req,res){
-    console.log(req)
-    res.json(req.session.user)
+    console.log(req.user)
+    res.json("test")
 }
 
 exports.login = function(req,res){
@@ -26,7 +26,12 @@ exports.login = function(req,res){
             if (!user.authenticate(req.body.password)) {
                 return res.json({code:1,message:'密码错误'})
             }
-            res.json({code:0,message:'登录成功'})
+            
+            req.login(user, function(err) {
+                if (err)return res.json({code:1,message:"登录错误"})
+                res.json({code:0,message:'登录成功'})
+            })
+            
         })
     
 }
