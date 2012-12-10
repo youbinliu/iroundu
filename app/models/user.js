@@ -11,6 +11,7 @@ var UserSchema = new Schema({
   , provider: String
   , hashed_password: String
   , salt: String
+  , avatar:String
   ,createdTime:{type: Date, default: Date.now}
 })
 
@@ -41,5 +42,7 @@ UserSchema.method('makeSalt', function() {
 UserSchema.method('encryptPassword', function(password) {
   return crypto.createHmac('sha1', this.salt).update(password).digest('hex')
 })
+
+//UserSchema.method('updateAvatar',function())
 
 mongoose.model('User', UserSchema)

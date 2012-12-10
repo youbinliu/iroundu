@@ -77,21 +77,35 @@ exports.register = function(req,res){
 }
 
 exports.uploadAvatar = function(req,res){
+    var user = req.user
+    
+    if(!user)return res.json({code:1,message:'未授权'})
+    
     var imageUpload = new ImageUpload();
     console.log(req.files.avatar)
+    
     var data = fs.readFileSync(req.files.avatar.path);
+    
     imageUpload.insert(data,function(result){
         console.log(result);
-        res.send('saved.');
-    })
-      
+        var oldAvatar = user.avatar;
+        
+        user.avatar = result;        
+        user.save(function(err){
+            if(err)return console.log(err);
+            else{
+                imageUpload.delete(oldAvatar);
+                return;
+            }
+        })
+    })      
     res.send('上传中.');   
 }
 
-exports.avatar = function(req,res){
+exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
     imageUpload.read(req.params.aid, function (data) {
-        res.contentType('image/jpeg');
+        //res.contentType('image/jpeg');
         res.send(data);
     }); 
 }
