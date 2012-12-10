@@ -94,7 +94,8 @@ exports.uploadAvatar = function(req,res){
         user.save(function(err){
             if(err)return console.log(err);
             else{
-                if(oldAvatar!=="")imageUpload.delete(oldAvatar);
+                console.log(oldAvatar);
+                //if(oldAvatar!=="")imageUpload.delete(oldAvatar);
                 return;
             }
         })
@@ -105,7 +106,7 @@ exports.uploadAvatar = function(req,res){
 exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
     imageUpload.read(req.params.aid, function (data) {
-        //res.contentType('image/jpeg');
+        res.contentType('image/jpeg');
         res.send(data);
     }); 
 }
