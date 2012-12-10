@@ -1,5 +1,6 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
+,   File = mongoose.model("Fs.files")
 ,   fs = require("fs")
 ,   util = require("../../lib/util")
 ,   ImageUpload = require("../../lib/imageUpload").ImageUpload
@@ -107,8 +108,9 @@ exports.uploadAvatar = function(req,res){
 exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
     imageUpload.read(req.params.aid, function (data) {
-        
-        res.contentType('image/jpeg');
-        res.send(data);
+        File.findById(req.params.aid,function(err,avatarInfo){
+            res.contentType(avatarInfo.contentType);
+            res.send(data);
+        })        
     }); 
 }
