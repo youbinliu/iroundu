@@ -107,10 +107,9 @@ exports.uploadAvatar = function(req,res){
 
 exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
-    imageUpload.read(req.params.aid, function (data) {
-        File.findById(req.params.aid,function(err,avatarInfo){
-            res.contentType(avatarInfo.contentType);
+    imageUpload.read(req.params.aid, function (contentType,data) {       
+            res.contentType(contentType);
             res.send(data);
-        })        
-    }); 
+        }    
+    ); 
 }
