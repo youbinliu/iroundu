@@ -85,6 +85,7 @@ exports.uploadAvatar = function(req,res){
     console.log(req.files.avatar)
     
     var data = fs.readFileSync(req.files.avatar.path);
+    data.type = req.files.avatar.type;
     
     imageUpload.insert(data,function(result){
         console.log(result);
@@ -106,7 +107,8 @@ exports.uploadAvatar = function(req,res){
 exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
     imageUpload.read(req.params.aid, function (data) {
-        res.contentType('image');
+        
+        res.contentType('image/jpeg');
         res.send(data);
     }); 
 }
