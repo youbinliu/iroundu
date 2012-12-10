@@ -90,11 +90,11 @@ exports.uploadAvatar = function(req,res){
         console.log(result);
         var oldAvatar = user.avatar;
         
-        user.avatar = result;        
+        user.avatar = result._id;        
         user.save(function(err){
             if(err)return console.log(err);
             else{
-                imageUpload.delete(oldAvatar);
+                if(oldAvatar!=="")imageUpload.delete(oldAvatar);
                 return;
             }
         })
