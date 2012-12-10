@@ -106,7 +106,7 @@ exports.uploadAvatar = function(req,res){
 exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
     imageUpload.read(req.params.aid, function (data) {
-        res.contentType('image/jpeg');
+        res.contentType('image');
         res.send(data);
     }); 
 }
