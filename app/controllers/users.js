@@ -96,7 +96,7 @@ exports.uploadAvatar = function(req,res){
             if(err)return console.log(err);
             else{
                 console.log(oldAvatar);
-                //if(oldAvatar!=="")imageUpload.delete(oldAvatar);
+                if(oldAvatar!=="")imageUpload.delete(oldAvatar);
                 return;
             }
         })
