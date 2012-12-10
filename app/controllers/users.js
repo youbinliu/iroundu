@@ -82,13 +82,12 @@ exports.uploadAvatar = function(req,res){
     if(!user)return res.json({code:1,message:'未授权'})
     
     var imageUpload = new ImageUpload();
-    console.log(req.files.avatar)
-    
+   
     var data = fs.readFileSync(req.files.avatar.path);
     data.type = req.files.avatar.type;
     
     imageUpload.insert(data,function(result){
-        console.log(result);
+        
         var oldAvatar = user.avatar;
         
         user.avatar = result._id;        
@@ -106,7 +105,11 @@ exports.uploadAvatar = function(req,res){
 
 exports.avatar = function(req,res){    
     var imageUpload = new ImageUpload();
-    imageUpload.read(req.params.aid, function (contentType,data) {       
+    imageUpload.read(req.params.aid, function (err,contentType,data) {
+            if(err){
+                res.send({code:1,message:"图片不存在"});
+                return ;
+            };
             res.contentType(contentType);
             res.send(data);
         }    
