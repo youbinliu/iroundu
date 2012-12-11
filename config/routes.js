@@ -12,6 +12,7 @@ module.exports.setup = function (app, passport) {
   app.get('/'+_v+'/users/test', users.test)
   app.post('/'+_v+'/users/avatar',users.uploadAvatar)
   app.get('/'+_v+'/users/avatar/:aid',users.avatar)
+  app.post('/'+_v+'/users/modifypwd',users.modifyPwd)
   
   app.param('userId', function (req, res, next, id) {
     User
