@@ -12,6 +12,7 @@ var UserSchema = new Schema({
   , hashed_password: String
   , salt: String
   , avatar:String
+  , gender:String
   ,createdTime:{type: Date, default: Date.now}
 })
 

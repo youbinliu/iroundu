@@ -76,6 +76,23 @@ exports.register = function(req,res){
     })
 }
 
+exports.modifyPwd = function(req,res){
+    var user = req.user
+    
+    if(!user)return res.json({code:1,message:'未授权'})
+    
+    if(util.isNullOrEmity(req.body.password) || util.isNullOrEmity(req.body.oldPwd))
+    return res.json({code:1,message:'必要信息缺失'})
+    
+    if(!user.authenticate(req.body.oldPwd))return res.json({code:1,message:'原密码错误'})
+    
+    user.password = req.body.password;        
+    user.save(function(err){
+        if(err)return res.json({code:1,message:'修改错误'+err.errors})
+        else return res.json({code:0,message:'修改成功'});
+    })
+}
+
 exports.uploadAvatar = function(req,res){
     var user = req.user
     
@@ -94,7 +111,6 @@ exports.uploadAvatar = function(req,res){
         user.save(function(err){
             if(err)return console.log(err);
             else{
-                console.log(oldAvatar);
                 if(oldAvatar!=="")imageUpload.delete(oldAvatar);
                 return;
             }
