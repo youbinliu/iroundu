@@ -21,5 +21,9 @@ require("./lib/passport").setup(passport)
 config.appSet(app,passport)
 require("./config/routes").setup(app,passport)
 
+app.get('/', function(req, res){
+    res.render('index');
+});
+
 app.listen(config.settings[config.env].port);
 console.log('Listening on port '+config.settings[config.env].port);

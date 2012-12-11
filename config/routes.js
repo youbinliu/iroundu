@@ -25,8 +25,6 @@ module.exports.setup = function (app, passport) {
       })
   })
   
-  app.get('/', function(req, res){
-      res.render('index');
-  });
+ 
 
 }
