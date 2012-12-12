@@ -25,6 +25,8 @@ exports.appSet = function(app,passport){
     app.use(express.static(__dirname + '/public'));
     app.use(express.static('../public'));
     
+    console.log(process.cwd());
+    
     app.use(express.logger(':method :url :status'))
     
     app.use(express.cookieParser()); 
