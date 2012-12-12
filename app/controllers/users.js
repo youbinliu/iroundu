@@ -123,7 +123,6 @@ exports.avatar = function(req,res){
     var imageUpload = new ImageUpload();
     imageUpload.read(req.params.aid, function (err,contentType,data) {
             if(err){
-                console.log(err)
                 res.send({code:1,message:"图片不存在"});
                 return ;
             };
