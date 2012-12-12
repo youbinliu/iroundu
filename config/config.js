@@ -16,7 +16,7 @@ exports.settings = {
 
 exports.appSet = function(app,passport){
     app.set('showStackError',true)   
-    
+    app.use(express.favicon());
     app.engine('.html', require('ejs').__express);
     app.set('views', process.cwd()+'/app/views');
     app.set('view engine', 'html');
