@@ -31,7 +31,7 @@ module.exports.setup = function (app, passport) {
   app.post(voice_pre+'new',voice.add)
   app.get(voice_pre+'delete/:vid',voice.delete)
   app.get(voice_pre+'list/:uid/:pid',voice.list)
-  app.post(voice_pre+'doreply/:vid/'.voice.doreply)
+  app.post(voice_pre+'doreply/:vid/',voice.doreply)
   app.get(voice_pre+'reply/:vid/:pid',voice.reply)
   app.get(voice_pre+'show/:vid',voice.show)
   
