@@ -2,7 +2,7 @@ var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
 ,   fs = require("fs")
 ,   util = require("../../lib/util")
-,   ImageUpload = require("../../lib/imageUpload").ImageUpload
+,   FileUpload = require("../../lib/FileUpload").FileUpload
 
 exports.authCallback = function(req,res,next){}
 
@@ -98,12 +98,12 @@ exports.uploadAvatar = function(req,res){
     
     if(!user)return res.json({code:1,message:'未授权'})
     
-    var imageUpload = new ImageUpload();
-   
+    var fileUpload = new FileUpload();
+    
     var data = fs.readFileSync(req.files.avatar.path);
     data.type = req.files.avatar.type;
     
-    imageUpload.insert(data,function(result){
+    fileUpload.insert(data,function(result){
         
         var oldAvatar = user.avatar;
         
@@ -111,7 +111,7 @@ exports.uploadAvatar = function(req,res){
         user.save(function(err){
             if(err)return console.log(err);
             else{
-                if(oldAvatar!=="")imageUpload.delete(oldAvatar);
+                if(oldAvatar!=="")fileUpload.delete(oldAvatar);
                 return;
             }
         })
@@ -120,8 +120,9 @@ exports.uploadAvatar = function(req,res){
 }
 
 exports.avatar = function(req,res){    
-    var imageUpload = new ImageUpload();
-    imageUpload.read(req.params.aid, function (err,contentType,data) {
+    var fileUpload = new FileUpload('image');
+    
+    fileUpload.read(req.params.aid, function (err,contentType,data) {
             if(err){
                 res.send({code:1,message:"图片不存在"});
                 return ;
