@@ -98,7 +98,7 @@ exports.uploadAvatar = function(req,res){
     
     if(!user)return res.json({code:1,message:'未授权'})
     
-    var fileUpload = new FileUpload();
+    var fileUpload = new FileUpload('image');
     
     var data = fs.readFileSync(req.files.avatar.path);
     data.type = req.files.avatar.type;
