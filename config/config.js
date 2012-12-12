@@ -18,12 +18,10 @@ exports.appSet = function(app,passport){
     app.set('showStackError',true)   
     
     app.engine('.html', require('ejs').__express);
-    app.set('views', __dirname + '/app/views');
+    app.set('views', __dirname + '../app/views');
     app.set('view engine', 'html');
     
-    app.use(express.static(__dirname + '/public'));
-    
-    console.log(__dirname)
+    app.use(express.static(__dirname + '../public'));
     
     app.use(express.logger(':method :url :status'))
     
