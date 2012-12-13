@@ -13,7 +13,7 @@ var UserSchema = new Schema({
   , salt: String
   , avatar:String
   , gender:String
-  ,createdTime:{type: Date, default: Date.now}
+  ,createdAt:{type: Date, default: Date.now}
 })
 
 // virtual attributes

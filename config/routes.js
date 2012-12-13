@@ -1,6 +1,7 @@
 
 var mongoose = require('mongoose')
   , User = mongoose.model('User')
+  , Voice = mongoose.model('Voice')
 var _v = 1
 
 module.exports.setup = function (app, passport) {
@@ -15,25 +16,43 @@ module.exports.setup = function (app, passport) {
   app.get(users_pre+'avatar/:aid',users.avatar)
   app.post(users_pre+'modifypwd',users.modifyPwd)
   
-  app.param('userId', function (req, res, next, id) {
+  app.param('uid', function (req, res, next, uid) {
     User
-      .findOne({ _id : id })
+      .findOne({ _id : uid })
       .exec(function (err, user) {
         if (err) return next(err)
-        if (!user) return next(new Error('Failed to load User ' + id))
+        if (!user) return next(new Error('Failed to load User ' + uid))
         req.profile = user
+        next()
+      })
+  })
+  
+  app.param('vid', function (req, res, next, vid) {
+    Voice
+      .findOne({ _id : vid })
+      .exec(function (err, voice) {
+        if (err) return next(err)
+        if (!voice) return next(new Error('Failed to load Voice ' + vid))
+        req.voice = voice
         next()
       })
   })
   
   var voice = require("../app/controllers/voices");
   var voice_pre = '/'+_v+'voices/'
+  //新建一条语言信息
   app.post(voice_pre+'new',voice.add)
+  //删除一条语言信息
   app.get(voice_pre+'delete/:vid',voice.delete)
-  app.get(voice_pre+'list/:uid/:pid',voice.list)
+  //列出用户uid的第page页语音信息
+  app.get(voice_pre+'list/:uid/:page',voice.list)
+  //回复一条语言信息
   app.post(voice_pre+'doreply/:vid/',voice.doreply)
-  app.get(voice_pre+'reply/:vid/:pid',voice.reply)
+  //列出语言vid的第page页的回复信息
+  app.get(voice_pre+'reply/:vid/:page',voice.reply)
+  //展示一条语言信息
   app.get(voice_pre+'show/:vid',voice.show)
-  
+  //获取语言信息实体
+  app.get(voice_pre+'of/:vid',voice.of)
   
 }
