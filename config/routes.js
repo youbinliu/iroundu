@@ -26,7 +26,7 @@ module.exports.setup = function (app, passport) {
         next()
       })
   })
-  
+ /* 
   app.param('vid', function (req, res, next, vid) {
     Voice
       .findOne({ _id : vid })
@@ -37,7 +37,7 @@ module.exports.setup = function (app, passport) {
         next()
       })
   })
-  
+  */
   var voice = require("../app/controllers/voices");
   var voice_pre = '/'+_v+'/voices/'
   //新建一条语言信息
