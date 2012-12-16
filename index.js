@@ -17,6 +17,8 @@ modelFiles.forEach(function(modelName){
     require(modelsPath+'/'+modelName)
 })
 
+app.use(express.static(__dirname + '/public'));
+
 require("./lib/passport").setup(passport)
 config.appSet(app,passport)
 require("./config/routes").setup(app,passport)
@@ -25,6 +27,6 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
-app.use(express.static(__dirname + '/public'));
+
 app.listen(config.settings[config.env].port);
 console.log('Listening on port '+config.settings[config.env].port);

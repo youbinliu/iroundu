@@ -40,9 +40,12 @@ exports.add = function(req,res){
               
         v.save(function(err){
             if(err)return console.log(err);
+            return res.json({code:0,message:v._id});
         });
+        
+       ;   
     });
-    res.send('发布中.');   
+    
      
 };
 
