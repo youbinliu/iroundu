@@ -5,8 +5,8 @@ var mongoose = require('mongoose')
 
 
 var FollowSchema = new Schema({
-    user: String
-  , follow:String
+    user: { type: Schema.Types.ObjectId, ref: 'User' }
+  , follow:{ type: Schema.Types.ObjectId, ref: 'User' }
   , createdTime:{type: Date, default: Date.now}
 })
 

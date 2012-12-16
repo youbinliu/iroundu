@@ -55,4 +55,8 @@ module.exports.setup = function (app, passport) {
   //获取语言信息实体
   app.get(voice_pre+'of/:vid',voice.of)
   
+  app.get(voice_pre+"like/:vid",voice.like)
+  app.get(voice_pre+"dislike/:vid",voice.dislike)
+  app.get(voice_pre+'likelist/:page',voice.likelist)
+  app.get(voice_pre+'islike',voice.islike)
 }

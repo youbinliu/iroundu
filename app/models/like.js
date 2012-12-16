@@ -5,8 +5,8 @@ var mongoose = require('mongoose')
 
 
 var LikeSchema = new Schema({
-    user: String
-  , voice:String
+    user: {type: Schema.Types.ObjectId, ref: 'User' }
+  , voice:{ type: Schema.Types.ObjectId, ref: 'Voice' }
   , createdTime:{type: Date, default: Date.now}
 })
 

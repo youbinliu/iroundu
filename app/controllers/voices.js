@@ -117,7 +117,7 @@ exports.doreply = function(req,res){
 };
 
 exports.reply = function(req,res){
-    var perPage = 5;
+    var perPage = 2;
     
     var page = req.params.page;
     if(util.isNullOrEmity(page))page = 0;
@@ -157,5 +157,64 @@ exports.of = function(req,res){
     ); 
 }
 
+exports.like = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
+    
+    Voice.findOne({_id:req.params.vid}).exec(function(err,voice){
+        if(!voice)return res.json({code:1,message:'找不到说说'});
+        
+        Like.findOne({user:user._id,voice:voice._id}).exec(function(err, like) {
+            if(!like)return res.json({code:1,message:'已经喜欢'});
+            
+            var l = new Like();
+            l.voice = voice._id;
+            l.user = user._id;
+            l.save(function(err,like){
+                return res.json({code:0,message:'生成喜欢关系'});
+            });
+        });        
+    });    
+}
+
+exports.dislike = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
+    
+    Voice.findOne({_id:req.params.vid}).exec(function(err,voice){
+        if(!voice)return res.json({code:1,message:'找不到说说'});
+        
+        Like.findOneAndRemove({voice:voice._id},function(err){
+            return res.json({code:0,message:'取消喜欢关系'});
+        })
+    });    
+}
+
+exports.likelist = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    var perPage = 2;
+    
+    var page = req.params.page;
+    if(util.isNullOrEmity(page))page = 0;
+    
+    Like.find({user:user._id})
+    .sort({'createdAt': -1}) // sort by date
+    .limit(perPage)
+    .skip(perPage * page)
+    .exec(function(err, likes) {
+        if (err) {return res.json({code:1,message:'数据库查询错误'})}
+        else {return res.json(likes)}
+    });
+}
+
+exports.islike = function(req,res){
+    
+}
 
 
