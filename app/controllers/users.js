@@ -1,5 +1,6 @@
 var mongoose = require("mongoose")
 ,   User = mongoose.model("User")
+,   Follow = mongoose.model("Follow")
 ,   fs = require("fs")
 ,   util = require("../../lib/util")
 ,   FileUpload = require("../../lib/FileUpload").FileUpload
@@ -132,3 +133,99 @@ exports.avatar = function(req,res){
         }    
     ); 
 }
+
+
+exports.follow = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
+    
+    User.findOne({_id:req.params.uid}).exec(function(err,uo){
+        if(!uo)return res.json({code:1,message:'找不到用户'});
+        
+        Follow.findOne({user:user._id,follow:uo._id}).exec(function(err, follow) {
+            if(follow)return res.json({code:1,message:'已经关注'});
+            
+            var f = new Follow();
+            f.user = user._id;
+            f.follow = uo._id;
+            f.save(function(err){
+                return res.json({code:0,message:'生成关注关系'});
+            });
+        });        
+    });    
+}
+
+exports.disfollow = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
+    
+    User.findOne({_id:req.params.uid}).exec(function(err,uo){
+        if(!uo)return res.json({code:1,message:'找不到用户'});
+        
+        Follow.findOneAndRemove({follow:uo._id},function(err){
+            return res.json({code:0,message:'取消关注关系'});
+        })
+    });    
+}
+
+exports.followlist = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    var perPage = 2;
+    
+    var page = req.params.page;
+    if(util.isNullOrEmity(page))page = 0;
+    
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数缺损'});
+    
+    Follow.find({user:req.params.uid})
+    .populate('follow')
+    .sort({'createdAt': -1}) // sort by date
+    .limit(perPage)
+    .skip(perPage * page)
+    .exec(function(err, follows) {
+        if (err) {return res.json({code:1,message:'数据库查询错误'})}
+        else {return res.json(follows)}
+    });
+}
+
+exports.followedlist = function(req,res){
+    
+    var perPage = 2;
+    
+    var page = req.params.page;
+    if(util.isNullOrEmity(page))page = 0;
+    
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数缺损'});
+    
+    Follow.find({follow:req.params.uid})
+    .populate('user')
+    .sort({'createdAt': -1}) // sort by date
+    .limit(perPage)
+    .skip(perPage * page)
+    .exec(function(err, follows) {
+        if (err) {return res.json({code:1,message:'数据库查询错误'})}
+        else {return res.json(follows)}
+    });
+}
+
+
+exports.isfollow = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
+    
+    Follow.findOne({user:user._id,follow:req.params.uid})
+    .exec(function(err,follow){
+        if(follow)return res.json({code:0,message:"存在关注"});
+        else return res.json({code:1,message:"不存在关注"});
+    });
+}
+
+

@@ -195,16 +195,34 @@ exports.dislike = function(req,res){
 }
 
 exports.likelist = function(req,res){
-    var user = req.user;    
-    if(!user)return res.json({code:1,message:'未授权'});
     
     var perPage = 2;
     
     var page = req.params.page;
     if(util.isNullOrEmity(page))page = 0;
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
     
-    Like.find({user:user._id})
+    Like.find({user:req.params.uid})
     .populate('voice')
+    .sort({'createdAt': -1}) // sort by date
+    .limit(perPage)
+    .skip(perPage * page)
+    .exec(function(err, likes) {
+        if (err) {return res.json({code:1,message:'数据库查询错误'})}
+        else {return res.json(likes)}
+    });
+}
+
+exports.likeedlist = function(req,res){
+    
+    var perPage = 2;
+    
+    var page = req.params.page;
+    if(util.isNullOrEmity(page))page = 0;
+    if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
+    
+    Like.find({user:req.params.vid})
+    .populate('user')
     .sort({'createdAt': -1}) // sort by date
     .limit(perPage)
     .skip(perPage * page)

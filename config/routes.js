@@ -17,10 +17,11 @@ module.exports.setup = function (app, passport) {
   app.post(users_pre+'modifypwd',users.modifyPwd)
   
   //关注关系
-  //app.get(users_pre+"follow",users.follow)
- // app.get(users_pre+"disfollow",users.disfollow)
- // app.get(users_pre+'followlist',users.followlist)
- // app.get(users_pre+'isfollow',users.isfollow)
+  app.get(users_pre+"follow/:uid",users.follow)
+  app.get(users_pre+"disfollow/:uid",users.disfollow)
+  app.get(users_pre+'followlist/:uid/:page',users.followlist)
+  app.get(users_pre+'followedlist/:uid/:page',users.followlist)
+  app.get(users_pre+'isfollow/:uid',users.isfollow)
   
   app.param('uid', function (req, res, next, uid) {
     User
@@ -63,7 +64,8 @@ module.exports.setup = function (app, passport) {
   //喜欢关系
   app.get(voice_pre+"like/:vid",voice.like)
   app.get(voice_pre+"dislike/:vid",voice.dislike)
-  app.get(voice_pre+'likelist/:page',voice.likelist)
+  app.get(voice_pre+'likelist/:uid/:page',voice.likelist)
+  app.get(voice_pre+'likeedlist/:vid/:page',voice.likelist)
   app.get(voice_pre+'islike',voice.islike)
   
   
