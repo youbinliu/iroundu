@@ -21,7 +21,7 @@ exports.appSet = function(app,passport){
     app.set('views', process.cwd()+'/app/views');
     app.set('view engine', 'html');
     
-    app.use(express.static(process.cwd() + '/public'));
+//    app.use(express.static(process.cwd() + '/public'));
     
     app.use(express.logger(':method :url :status'))
     

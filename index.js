@@ -25,5 +25,6 @@ app.get('/', function(req, res){
     res.render('index');
 });
 
+app.use(express.static(__dirname + '/public'));
 app.listen(config.settings[config.env].port);
 console.log('Listening on port '+config.settings[config.env].port);
