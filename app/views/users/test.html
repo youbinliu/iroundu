@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8">
+    <title>Iroundu Test</title>   
+    <meta name="description" content="iroundu">
+    <meta name="author" content="eliotliu">
+
+    <!-- Le styles -->
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/bootstrap-responsive.min.css" rel="stylesheet"> 
+  </head>
+
+  <body>
+
+    <div class="input-append">
+      <input class="span2" id="voiceid" type="text">
+      <button class="btn" type="button" id="btnPlay">Play!</button>
+    </div>
+
+    <!-- Le javascript
+    ================================================== -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/jquery.jmp3.js"></script>
+    <script>
+        $("#btnPlay").click(function(){
+            $.get("http://iroundu.cae.hustcloud.com/1/voices/show/"+$("#voiceid").val(),{},function(data){
+                
+            })
+        })
+        
+    </script>
+  </body>
+</html>
+
