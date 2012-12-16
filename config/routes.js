@@ -16,6 +16,12 @@ module.exports.setup = function (app, passport) {
   app.get(users_pre+'avatar/:aid',users.avatar)
   app.post(users_pre+'modifypwd',users.modifyPwd)
   
+  //关注关系
+  //app.get(users_pre+"follow",users.follow)
+ // app.get(users_pre+"disfollow",users.disfollow)
+ // app.get(users_pre+'followlist',users.followlist)
+ // app.get(users_pre+'isfollow',users.isfollow)
+  
   app.param('uid', function (req, res, next, uid) {
     User
       .findOne({ _id : uid })
@@ -54,9 +60,11 @@ module.exports.setup = function (app, passport) {
   app.get(voice_pre+'show/:vid',voice.show)
   //获取语言信息实体
   app.get(voice_pre+'of/:vid',voice.of)
-  
+  //喜欢关系
   app.get(voice_pre+"like/:vid",voice.like)
   app.get(voice_pre+"dislike/:vid",voice.dislike)
   app.get(voice_pre+'likelist/:page',voice.likelist)
   app.get(voice_pre+'islike',voice.islike)
+  
+  
 }

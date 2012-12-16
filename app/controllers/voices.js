@@ -204,6 +204,7 @@ exports.likelist = function(req,res){
     if(util.isNullOrEmity(page))page = 0;
     
     Like.find({user:user._id})
+    .populate('voice')
     .sort({'createdAt': -1}) // sort by date
     .limit(perPage)
     .skip(perPage * page)
@@ -214,7 +215,16 @@ exports.likelist = function(req,res){
 }
 
 exports.islike = function(req,res){
+    var user = req.user;    
+    if(!user)return res.json({code:1,message:'未授权'});
     
+    if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
+    
+    Like.findOne({user:user._id,voice:req.params.vid})
+    .exec(function(err,like){
+        if(like)return res.json({code:0,message:"存在喜欢"});
+        else return res.json({code:1,message:"不存在喜欢"});
+    });
 }
 
 
