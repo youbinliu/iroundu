@@ -16,6 +16,7 @@
     <div class="input-append">
       <input class="span2" id="voiceid" type="text">
       <button class="btn" type="button" id="btnPlay">Play!</button>
+      <div id="mp3"></div>
     </div>
 
     <!-- Le javascript
@@ -26,6 +27,19 @@
     <script>
         $("#btnPlay").click(function(){
             $.get("http://iroundu.cae.hustcloud.com/1/voices/show/"+$("#voiceid").val(),{},function(data){
+                if(data.code === 1)alert(data.message);
+                else{
+                    v = data.message
+                    $("#mp3").jmp3({
+            			filepath: "http://iroundu.cae.hustcloud.com/1/voices/of/"+v.file,
+        				backcolor: "ffd700",
+        				forecolor: "8B4513",
+        				width: 300,
+        				showdownload: "false"
+        			});
+
+                }
+                    
                 
             })
         })
