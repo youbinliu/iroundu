@@ -7,8 +7,9 @@ var mongoose = require('mongoose')
 var ReplySchema = new Schema({
     voice:String
   , user: String
-  , reply:{type:String,default:''}
+  , reply:String
   , file:String
+  , voiceLength:{type:Number,default:0}
   , createdAt:{type: Date, default: Date.now}
 })
 

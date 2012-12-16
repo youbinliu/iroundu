@@ -92,7 +92,6 @@ exports.doreply = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
         
-    var vid = req.params.vid;
     var fileUpload = new FileUpload('voice');
     
     var data ;
@@ -108,7 +107,7 @@ exports.doreply = function(req,res){
         var r = new Reply(req.body);
         r.user = user._id;
         r.file = result._id;
-              
+        r.voice = req.params.vid;
         r.save(function(err){
             if(err)return console.log(err);
         });

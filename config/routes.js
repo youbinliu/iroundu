@@ -47,7 +47,7 @@ module.exports.setup = function (app, passport) {
   //列出用户uid的第page页语音信息
   app.get(voice_pre+'list/:uid/:page',voice.list)
   //回复一条语言信息
-  app.post(voice_pre+'doreply/:vid/',voice.doreply)
+  app.post(voice_pre+'doreply/:vid',voice.doreply)
   //列出语言vid的第page页的回复信息
   app.get(voice_pre+'reply/:vid/:page',voice.reply)
   //展示一条语言信息
