@@ -39,7 +39,7 @@ module.exports.setup = function (app, passport) {
   })
   
   var voice = require("../app/controllers/voices");
-  var voice_pre = '/'+_v+'voices/'
+  var voice_pre = '/'+_v+'/voices/'
   //新建一条语言信息
   app.post(voice_pre+'new',voice.add)
   //删除一条语言信息
