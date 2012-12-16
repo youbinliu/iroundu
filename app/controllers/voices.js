@@ -139,7 +139,7 @@ exports.show = function(req,res){
     Voice.findOne({_id:vid}).exec(function(err, voice) {
         if(err)return res.json({code:1,message:'数据库查询失败'});
         if(!voice)return res.json({code:1,message:'not find voice'});
-        else return res.json(voice);
+        else return res.json({code:0,message:voice});
     })
     
 }
