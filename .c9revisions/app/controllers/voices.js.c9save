@@ -41,3 +41,5 @@
 {"ts":1355638730176,"patch":[[{"diffs":[[0,"      re"],[-1,"s.send('发布中.')"],[1,"turn res.json({code:0,message:v._id});"],[0,"\r\n      "]],"start1":1310,"start2":1310,"length1":30,"length2":54}]],"length":4455,"saved":false}
 {"contributors":[],"silentsave":false,"ts":1355644257805,"patch":[[{"diffs":[[0,"rn res.json("],[1,"code:0,message:"],[0,"voice);\r\n   "]],"start1":4032,"start2":4032,"length1":24,"length2":39}]],"length":4470,"saved":false}
 {"ts":1355644267645,"patch":[[{"diffs":[[0,"es.json("],[1,"{"],[0,"code:0,m"]],"start1":4036,"start2":4036,"length1":16,"length2":17},{"diffs":[[0,"ge:voice"],[1,"}"],[0,");\r\n    "]],"start1":4057,"start2":4057,"length1":16,"length2":17}]],"length":4472,"saved":false}
+{"ts":1355645215007,"patch":[[{"diffs":[[0,"e = req."],[-1,"body"],[1,"params"],[0,".page;\r\n"]],"start1":2155,"start2":2155,"length1":20,"length2":22}]],"length":4474,"saved":false}
+{"ts":1355645225116,"patch":[[{"diffs":[[0,"  var perPage = "],[-1,"5"],[1,"2"],[0,";\r\n    \r\n    var"]],"start1":2118,"start2":2118,"length1":33,"length2":33}]],"length":4474,"saved":false}

@@ -72,9 +72,9 @@ exports.delete = function(req,res){
 };
 
 exports.list = function(req,res){
-    var perPage = 5;
+    var perPage = 2;
     
-    var page = req.body.page;
+    var page = req.params.page;
     if(util.isNullOrEmity(page))page = 0;
     
     Voice.find({user:req.params.uid})
