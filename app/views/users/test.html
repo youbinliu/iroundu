@@ -16,7 +16,7 @@
     <div class="input-append">
       <input class="span2" id="voiceid" type="text">
       <button class="btn" type="button" id="btnPlay">Play!</button>
-      <div id="mp3"></div>
+      <span id="external" class="mp3">
     </div>
 
     <!-- Le javascript
@@ -30,7 +30,7 @@
                 if(data.code === 1)alert(data.message);
                 else{
                     v = data.message
-                    $("#mp3").jmp3({
+                    $("#external").jmp3({
             			filepath: "http://iroundu.cae.hustcloud.com/1/voices/of/"+v.file,
         				backcolor: "ffd700",
         				forecolor: "8B4513",
