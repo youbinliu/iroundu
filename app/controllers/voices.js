@@ -8,6 +8,9 @@ var mongoose = require("mongoose")
 ,   FileUpload = require("../../lib/FileUpload").FileUpload
 ,   _ = require('underscore');
 
+
+//message file or text
+//messageType 
 exports.add = function(req,res){
     
     var user = req.user;    
@@ -22,8 +25,8 @@ exports.add = function(req,res){
     var fileUpload = new FileUpload('voice');
     
     var data ;
-    if(res.body.messageType === 'text'){
-        data = new Buffer(res.body.message, "utf8");
+    if(req.body.messageType === 'text'){
+        data = new Buffer(req.body.message, "utf8");
         data.type = 'text/plain';
     }else{
         data = fs.readFileSync(req.files.voice.path);
