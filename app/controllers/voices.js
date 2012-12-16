@@ -167,7 +167,7 @@ exports.like = function(req,res){
         if(!voice)return res.json({code:1,message:'找不到说说'});
         
         Like.findOne({user:user._id,voice:voice._id}).exec(function(err, like) {
-            if(!like)return res.json({code:1,message:'已经喜欢'});
+            if(like)return res.json({code:1,message:'已经喜欢'});
             
             var l = new Like();
             l.voice = voice._id;
