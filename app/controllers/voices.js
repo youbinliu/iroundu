@@ -63,7 +63,7 @@ exports.delete = function(req,res){
         });
         //删除voice
         voice.remove();
-        
+        res.json({code:0,message:'删除成功'});
   });
   
 };
