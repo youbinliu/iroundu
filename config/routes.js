@@ -64,6 +64,7 @@ module.exports.setup = function (app, passport) {
   app.get(voice_pre+'delreply/:rid',voice.delreply)
   //展示一条语言信息
   app.get(voice_pre+'show/:vid',voice.show)
+  app.get(voice_pre+'playinc/:vid',voice.playinc)
   //获取语言信息实体
   app.get(voice_pre+'of/:vid',voice.of)
   //喜欢关系

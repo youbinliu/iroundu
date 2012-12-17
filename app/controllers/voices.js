@@ -75,6 +75,18 @@ exports.delete = function(req,res){
   
 };
 
+exports.playinc = function(req,res){
+    var vid = req.params.vid;
+    Voice.findOne({ _id : vid }).exec(function (err, voice) {
+        if (err) return console.log(err);
+        if (!voice) return res.json({code:1,message:'not find the voice'});
+        voice.playAmount = voice.playAmount +1;
+        voice.save(function(err){
+            res.json({code:0,message:voice.playAmount});
+        })
+    })
+}
+
 exports.replyCount = function(req,res){
     if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
     Reply.count({voice:req.params.vid},function(err,count){
