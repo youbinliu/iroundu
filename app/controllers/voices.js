@@ -71,6 +71,15 @@ exports.delete = function(req,res){
   
 };
 
+exports.voiceCount = function(req,res){
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
+    Voice.count({user:req.params.uid},function(err,count){
+        if(err)return res.json({code:1,message:'数据库错误'})
+        else return res.json({code:0,message:count})
+    })
+}
+
+
 exports.list = function(req,res){
     var perPage = 2;
     
@@ -133,6 +142,24 @@ exports.reply = function(req,res){
     
 };
 
+exports.delreply = function(req,res){
+
+    Reply.findOne({ _id : req.params.rid }).exec(function (err, reply) {
+        if (err) return console.log(err);
+        if (!reply) return res.json({code:1,message:'not find the reply'});
+        //删除voice文件
+        var file = reply.file;
+        if(file){
+            var fileUpload = new FileUpload('voice'); 
+            fileUpload.delete(file);
+        }
+       
+        //删除voice
+        reply.remove();
+        res.json({code:0,message:'删除成功'});
+  });
+}
+
 exports.show = function(req,res){    
     var vid = req.params.vid;
     Voice.findOne({_id:vid}).exec(function(err, voice) {
@@ -192,6 +219,22 @@ exports.dislike = function(req,res){
             return res.json({code:0,message:'取消喜欢关系'});
         })
     });    
+}
+
+exports.likeCount = function(req,res){
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
+    Like.count({user:req.params.uid},function(err,count){
+        if(err)return res.json({code:1,message:'数据库错误'})
+        else return res.json({code:0,message:count})
+    })
+}
+
+exports.likeedCount = function(req,res){
+    if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
+    Like.count({voice:req.params.vid},function(err,count){
+        if(err)return res.json({code:1,message:'数据库错误'})
+        else return res.json({code:0,message:count})
+    })
 }
 
 exports.likelist = function(req,res){

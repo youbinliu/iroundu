@@ -34,3 +34,4 @@
 {"contributors":[],"silentsave":false,"ts":1354633763131,"patch":[[{"diffs":[[0," String\n"],[1,"  , avatar:String\n"],[0,"  ,creat"]],"start1":271,"start2":271,"length1":16,"length2":34}]],"length":1119,"saved":false}
 {"ts":1354639178871,"patch":[[{"diffs":[[0,"x')\n})\n\n"],[1,"//UserSchema.method('updateAvatar',function())\n\n"],[0,"mongoose"]],"start1":1076,"start2":1076,"length1":16,"length2":64}]],"length":1167,"saved":false}
 {"contributors":[],"silentsave":false,"ts":1355155137049,"patch":[[{"diffs":[[0,":String\n"],[1,"  , gender:String\n"],[0,"  ,creat"]],"start1":289,"start2":289,"length1":16,"length2":34}]],"length":1185,"saved":false}
+{"contributors":[],"silentsave":false,"ts":1355714044352,"patch":[[{"diffs":[[0,"ated"],[-1,"Time"],[1,"At"],[0,":{ty"]],"start1":321,"start2":321,"length1":12,"length2":10}]],"length":1183,"saved":false}

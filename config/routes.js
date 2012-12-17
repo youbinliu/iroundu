@@ -20,7 +20,9 @@ module.exports.setup = function (app, passport) {
   app.get(users_pre+"follow/:uid",users.follow)
   app.get(users_pre+"disfollow/:uid",users.disfollow)
   app.get(users_pre+'followlist/:uid/:page',users.followlist)
-  app.get(users_pre+'followedlist/:uid/:page',users.followlist)
+  app.get(users_pre+'followedlist/:uid/:page',users.followedlist)
+  app.get(users_pre+'followcount/:uid',users.followCount)
+  app.get(users_pre+'followedcount/:uid',users.followedCount)
   app.get(users_pre+'isfollow/:uid',users.isfollow)
   
   app.param('uid', function (req, res, next, uid) {
@@ -53,10 +55,12 @@ module.exports.setup = function (app, passport) {
   app.get(voice_pre+'delete/:vid',voice.delete)
   //列出用户uid的第page页语音信息
   app.get(voice_pre+'list/:uid/:page',voice.list)
+  app.get(voice_pre+'count/:uid',voice.voiceCount)
   //回复一条语言信息
   app.post(voice_pre+'doreply/:vid',voice.doreply)
   //列出语言vid的第page页的回复信息
   app.get(voice_pre+'reply/:vid/:page',voice.reply)
+  app.get(voice_pre+'delreply/:rid',voice.delreply)
   //展示一条语言信息
   app.get(voice_pre+'show/:vid',voice.show)
   //获取语言信息实体
@@ -65,7 +69,9 @@ module.exports.setup = function (app, passport) {
   app.get(voice_pre+"like/:vid",voice.like)
   app.get(voice_pre+"dislike/:vid",voice.dislike)
   app.get(voice_pre+'likelist/:uid/:page',voice.likelist)
-  app.get(voice_pre+'likeedlist/:vid/:page',voice.likelist)
+  app.get(voice_pre+'likeedlist/:vid/:page',voice.likeedlist)
+  app.get(voice_pre+'likecount/:uid',voice.likeCount)
+  app.get(voice_pre+'likeedcount/:vid',voice.likeedCount)
   app.get(voice_pre+'islike',voice.islike)
   
   

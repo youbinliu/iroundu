@@ -172,10 +172,30 @@ exports.disfollow = function(req,res){
     });    
 }
 
-exports.followlist = function(req,res){
-    var user = req.user;    
-    if(!user)return res.json({code:1,message:'未授权'});
+exports.followCount = function(req,res){
     
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数缺损'});
+    
+    Follow.count({user:req.params.uid},function(err,count){
+        if(err)return res.json({code:1,message:'数据库出错'})
+        else return res.json({code:0,message:count);
+    })
+    
+}
+
+exports.followedCount = function(req,res){
+    
+    if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数缺损'});
+    
+    Follow.count({follow:req.params.uid},function(err,count){
+        if(err)return res.json({code:1,message:'数据库出错'})
+        else return res.json({code:0,message:count);
+    })
+    
+}
+
+exports.followlist = function(req,res){
+   
     var perPage = 2;
     
     var page = req.params.page;
