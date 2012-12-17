@@ -6,10 +6,8 @@ var mongoose = require('mongoose')
 
 var VoiceSchema = new Schema({
     user: String
-  , reply:{type:String,default:''}
   , file:String
   , voiceLength:{type:Number,default:0}
-  , likeAmount: {type:Number,default:0}
   , playAmount: {type:Number,default:0}
   , longitude: {type:Number,default:0}
   , latitude: {type:Number,default:0}

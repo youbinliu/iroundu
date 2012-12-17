@@ -50,10 +50,14 @@ exports.add = function(req,res){
 };
 
 exports.delete = function(req,res){
-  var vid = req.params.vid;
-  Voice.findOne({ _id : vid }).exec(function (err, voice) {
+    var user = req.user;
+    if(!user)return res.json({code:1,message:'未授权'});
+    
+    var vid = req.params.vid;
+    Voice.findOne({ _id : vid }).exec(function (err, voice) {
         if (err) return console.log(err);
         if (!voice) return res.json({code:1,message:'not find the voice'});
+        if(voice.user !== user._id)return res.json({code:1,message:'没有权限'});
         //删除voice文件
         var file = voice.file;
         if(file){
@@ -71,6 +75,14 @@ exports.delete = function(req,res){
   
 };
 
+exports.replyCount = function(req,res){
+    if(util.isNullOrEmity(req.params.vid))return res.json({code:1,message:'参数错误'});
+    Reply.count({voice:req.params.vid},function(err,count){
+        if(err)return res.json({code:1,message:'数据库错误'})
+        else return res.json({code:0,message:count})
+    })
+}
+
 exports.voiceCount = function(req,res){
     if(util.isNullOrEmity(req.params.uid))return res.json({code:1,message:'参数错误'});
     Voice.count({user:req.params.uid},function(err,count){
@@ -78,7 +90,6 @@ exports.voiceCount = function(req,res){
         else return res.json({code:0,message:count})
     })
 }
-
 
 exports.list = function(req,res){
     var perPage = 2;
@@ -143,10 +154,13 @@ exports.reply = function(req,res){
 };
 
 exports.delreply = function(req,res){
-
+    var user = req.user;
+    if(!user)return res.json({code:1,message:'未授权'});
+    
     Reply.findOne({ _id : req.params.rid }).exec(function (err, reply) {
         if (err) return console.log(err);
         if (!reply) return res.json({code:1,message:'not find the reply'});
+        if(reply.user !== user._id)return res.json({code:1,message:'没有权限'});
         //删除voice文件
         var file = reply.file;
         if(file){

@@ -46,8 +46,8 @@
           <li><a href="#user"><i class="icon-chevron-right"></i>用户</a></li>
           <li><a href="#follow"><i class="icon-chevron-right"></i>关注</a></li>
           <li><a href="#voice"><i class="icon-chevron-right"></i>录音</a></li>
-          <li><a href="#message"><i class="icon-chevron-right"></i>私信</a></li>
-          <li><a href="#feeds"><i class="icon-chevron-right"></i>新鲜事</a></li>
+          <li><a href="#like"><i class="icon-chevron-right"></i>喜欢</a></li>
+          <li><a href="#message"><i class="icon-chevron-right"></i>私信</a></li>          
         </ul>
       </div>
       <div class="span9">
@@ -88,23 +88,154 @@
           </p>
         </section>
         
-        
-      <!--  <section id="follow">
+        <section id="关注">
           <div class="page-header">
             <h1>关注 API</h1>
           </div>
-          <p class="lead"></p>
-                    
+          <p>
+              <strong>关注:</strong>GET /1/users/follow/:uid <br>
+              <strong>参数:</strong><code>uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>取消关注:</strong>GET /1/users/disfollow/:uid <br>
+              <strong>参数:</strong><code>uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>关注列表:</strong>GET /1/users/followlist/:uid/:page <br>
+              <strong>参数:</strong><code>:uid,:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>粉丝列表:</strong>GET /1/users/followedlist/:uid/:page <br>
+              <strong>参数:</strong><code>:uid,:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'} </code>
+          </p>
+          <p>
+              <strong>关注数目:</strong>GET /1/users/followcount/:uid <br>
+              <strong>参数:</strong><code>:uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>粉丝数目:</strong>GET /1/users/followedcount/:uid <br>
+              <strong>参数:</strong><code>:uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>是否关注:</strong>GET /1/users/isfollow/:uid <br>
+              <strong>参数:</strong><code>:uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
         </section>
-
+        
+    
         <section id="voice">
           <div class="page-header">
-            <h1>录音 API</h1>
+            <h1>说说 API</h1>
           </div>
-          <p class="lead"></p>
-                   
+          <p>
+              <strong>发布:</strong>POST /1/voices/new <br>
+              <strong>参数:</strong><code>:messageType('text' or 'mp3') 如果是text,则需要message参数，如果是mp3则需要文件voice，还有播放长度秒
+                  还有经度longitude，纬度latitude
+              </code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+           <p>
+              <strong>删除:</strong>GET /1/voices/delete/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+          <p>
+              <strong>用户说说列表:</strong>GET /1/voices/list/:uid/:page <br>
+              <strong>参数:</strong><code>:vid,:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+          <p>
+              <strong>用户说说数目:</strong>GET /1/voices/count/:uid <br>
+              <strong>参数:</strong><code>:uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+          <p>
+              <strong>说说回复:</strong>POST /1/voices/doreply/:vid <br>
+              <strong>参数:</strong><code>:vid，:messageType('text' or 'mp3') 如果是text,则需要message参数，如果是mp3则需要文件voice，还有播放长度秒</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+          <p>
+              <strong>回复列表:</strong>GET /1/voices/reply/:vid/:page <br>
+              <strong>参数:</strong><code>:vid,:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+           <p>
+              <strong>删除回复:</strong>GET /1/voices/delreply/:rid <br>
+              <strong>参数:</strong><code>:rid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>回复数目:</strong>GET /1/voices/replycount/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+        
+         <p>
+              <strong>语音实体信息:</strong>GET /1/voices/show/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+           <p>
+              <strong>说说实体:</strong>GET /1/voices/of/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
         </section>
-
+        
+         <section id="like">
+          <div class="page-header">
+            <h1>喜欢 API</h1>
+          </div>
+          <p>
+              <strong>喜欢:</strong>GET /1/voices/like/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>不喜欢:</strong>GET /1/voices/dislike/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+            <p>
+              <strong>用户的喜欢列表:</strong>GET /1/voices/likelist/:uid/:page <br>
+              <strong>参数:</strong><code>:uid,:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>用户的喜欢数目:</strong>GET /1/voices/likecount/:uid <br>
+              <strong>参数:</strong><code>:uid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>喜欢说说的用户列表:</strong>GET /1/voices/likeedlist/:vid/:page <br>
+              <strong>参数:</strong><code>:vid,:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>喜欢说说的用户数目:</strong>GET /1/voices/likeedcount/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>是否喜欢:</strong>GET /1/voices/islike/:vid <br>
+              <strong>参数:</strong><code>:vid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+        </section>
+        
         <section id="message">
           <div class="page-header">
             <h1>私信 API</h1>
@@ -113,13 +244,7 @@
               
         </section>
         
-        <section id="feeds">
-          <div class="page-header">
-            <h1>新鲜事 API</h1>
-          </div>
-          <p class="lead"></p>
-                 
-        </section>-->
+       
         
       </div>
     </div>

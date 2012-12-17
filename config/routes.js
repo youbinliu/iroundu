@@ -60,6 +60,7 @@ module.exports.setup = function (app, passport) {
   app.post(voice_pre+'doreply/:vid',voice.doreply)
   //列出语言vid的第page页的回复信息
   app.get(voice_pre+'reply/:vid/:page',voice.reply)
+  app.get(voice_pre+'replycount/:vid',voice.replyCount)
   app.get(voice_pre+'delreply/:rid',voice.delreply)
   //展示一条语言信息
   app.get(voice_pre+'show/:vid',voice.show)
@@ -72,7 +73,7 @@ module.exports.setup = function (app, passport) {
   app.get(voice_pre+'likeedlist/:vid/:page',voice.likeedlist)
   app.get(voice_pre+'likecount/:uid',voice.likeCount)
   app.get(voice_pre+'likeedcount/:vid',voice.likeedCount)
-  app.get(voice_pre+'islike',voice.islike)
+  app.get(voice_pre+'islike/:vid',voice.islike)
   
   
 }
