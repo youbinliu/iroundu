@@ -64,7 +64,7 @@ exports.reply = function(req,res){
     
     var mid = req.params.mid;
     
-    var replyMsg;
+    var replyMsg = {who:'',body:''};
     Message.findOne({_id:mid}).exec(function(err,msg){
         if(err || !msg)return res.json({code:1,message:'数据库错误'});
         if(String(msg.from) == String(user._id)){
