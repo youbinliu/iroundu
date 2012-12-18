@@ -76,5 +76,12 @@ module.exports.setup = function (app, passport) {
   app.get(voice_pre+'likeedcount/:vid',voice.likeedCount)
   app.get(voice_pre+'islike/:vid',voice.islike)
   
+  //私信
+  var msg = require("../app/controllers/messages");
+  var msg_pre = '/'+_v+'/voices/'
+  app.post(msg_pre+'add',msg.add)
+  app.get(msg_pre+'delete/:mid',msg.delete)
+  app.get(msg_pre+'list/:page',msg.list)
+  app.post(msg_pre+'reply/:mid',msg.reply)
   
 }
