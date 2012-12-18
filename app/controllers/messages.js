@@ -46,7 +46,7 @@ exports.list = function(req,res){
     if(util.isNullOrEmity(page))page = 0;
     
     var q = Message.find();
-    q.or([{ from: user._id }, { to: user._id }]);
+    q.or([{ from: user._id,fromshow:1}, { to: user._id,toshow:1 }]);
     q.sort({'createdAt': -1}) // sort by date
     .limit(perPage)
     .skip(perPage * page)
