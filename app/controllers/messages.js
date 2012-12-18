@@ -27,11 +27,10 @@ exports.delete = function(req,res){
     var mid = req.params.mid;
     Message.findOne({_id:mid}).exec(function(err,msg){
         if(err || !msg)return res.json({code:1,message:'数据库错误'});
-        console.log(typeof(msg.from));
-        console.log(typeof(user._id))
-        if(msg.from == user._id){
+       
+        if(msg.from === user._id){
             msg.fromshow = 0;
-        }else if(msg.to == user._id){
+        }else if(msg.to === user._id){
             msg.toshow = 0;
         }else{
             return res.json({code:1,message:'权限错误'})
