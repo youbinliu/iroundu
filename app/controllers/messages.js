@@ -8,8 +8,6 @@ exports.add = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
     
-    console.log("current user:"+user.username);
-    
     var msg = new Message(req.body);
     msg.from = user._id;
     msg.save(function(err,m){
@@ -21,8 +19,6 @@ exports.add = function(req,res){
 exports.delete = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
-    
-    console.log("current user:"+user.username);
     
     var mid = req.params.mid;
     Message.findOne({_id:mid}).exec(function(err,msg){
@@ -44,7 +40,6 @@ exports.list = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
     
-    console.log("current user:"+user.username);
     
     var perPage = 2;
     var page = req.params.page;
@@ -72,9 +67,9 @@ exports.reply = function(req,res){
     var replyMsg;
     Message.findOne({_id:mid}).exec(function(err,msg){
         if(err || !msg)return res.json({code:1,message:'数据库错误'});
-        if(msg.from == user._id){
+        if(String(msg.from) == String(user._id)){
             replyMsg.who = 'from';
-        }else if(msg.to == user._id){
+        }else if(String(msg.to) == String(user._id)){
             replyMsg.who = 'to';
         }else{
             return res.json({code:1,message:'权限错误'})
