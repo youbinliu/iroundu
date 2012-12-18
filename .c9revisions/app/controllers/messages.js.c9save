@@ -19,3 +19,4 @@
 {"ts":1355814950021,"patch":[[{"diffs":[[0,"replyMsg"],[1," = {}"],[0,";\r\n    M"]],"start1":1919,"start2":1919,"length1":16,"length2":21}]],"length":2515,"saved":false}
 {"ts":1355814969586,"patch":[[{"diffs":[[0,"yMsg = {"],[1,"who:'',body:''"],[0,"};\r\n    "]],"start1":1923,"start2":1923,"length1":16,"length2":30}]],"length":2529,"saved":false}
 {"ts":1355815354172,"patch":[[{"diffs":[[0,"user._id"],[-1," "],[1,",fromshow:1"],[0,"}, { to:"]],"start1":1404,"start2":1404,"length1":17,"length2":27},{"diffs":[[0,"user._id"],[1,",toshow:1"],[0," }]);\r\n "]],"start1":1432,"start2":1432,"length1":16,"length2":25}]],"length":2548,"saved":false}
+{"ts":1355817551528,"patch":[[{"diffs":[[0,"ge.find();\r\n"],[1,"    q.populate('from')\r\n    q.populate('to')\r\n"],[0,"    q.or([{ "]],"start1":1374,"start2":1374,"length1":24,"length2":70}]],"length":2594,"saved":false}

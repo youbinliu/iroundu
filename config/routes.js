@@ -79,7 +79,7 @@ module.exports.setup = function (app, passport) {
   //私信
   var msg = require("../app/controllers/messages");
   var msg_pre = '/'+_v+'/message/'
-  app.post(msg_pre+'add',msg.add)
+  app.post(msg_pre+'send',msg.add)
   app.get(msg_pre+'delete/:mid',msg.delete)
   app.get(msg_pre+'list/:page',msg.list)
   app.post(msg_pre+'reply/:mid',msg.reply)

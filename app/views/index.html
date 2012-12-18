@@ -245,8 +245,28 @@
           <div class="page-header">
             <h1>私信 API</h1>
           </div>
-          <p class="lead"></p>
-              
+          <p>
+              <strong>发送:</strong>POST /1/message/send <br>
+              <strong>参数:</strong><code>:to(uid),:body(text)</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          <p>
+              <strong>回复:</strong>POST /1/message/reply <br>
+              <strong>参数:</strong><code>:who('from' or 'to'),:body(text)</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+          
+          <p>
+              <strong>回复:</strong>GET /1/message/delete/:mid <br>
+              <strong>参数:</strong><code>:mid</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
+            
+            <p>
+              <strong>回复:</strong>GET /1/message/list/:page <br>
+              <strong>参数:</strong><code>:page</code><br>
+              <strong>返回值:</strong><code>{code:code,message:'message'}</code>
+          </p>
         </section>
         
        
