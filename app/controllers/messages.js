@@ -8,6 +8,8 @@ exports.add = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
     
+    console.log("current user:"+user.username);
+    
     var msg = new Message(req.body);
     msg.from = user._id;
     msg.save(function(err,m){
@@ -19,6 +21,8 @@ exports.add = function(req,res){
 exports.delete = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
+    
+    console.log("current user:"+user.username);
     
     var mid = req.params.mid;
     Message.findOne({_id:mid}).exec(function(err,msg){
@@ -39,6 +43,8 @@ exports.list = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
     
+    console.log("current user:"+user.username);
+    
     var perPage = 2;
     var page = req.params.page;
     if(util.isNullOrEmity(page))page = 0;
@@ -57,6 +63,8 @@ exports.list = function(req,res){
 exports.reply = function(req,res){
     var user = req.user;
     if(!user)return res.json({code:1,message:'未授权'});
+    
+    console.log("current user:"+user.username);
     
     var mid = req.params.mid;
     
